@@ -8,6 +8,10 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * Ntt Data - Top Employer 2023.
+ * Todos los derechos Reservados.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,15 +19,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "customer")
 public class Customer extends BaseAuditDto {
 
-    @Id
-    private String idCustomer;
-    private String customerType;
-    private String customerCategory;
-    private String dni;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String username;
-    private Address address;
+  @Id
+  private String idCustomer;
+  private String customerType;
+  private String customerCategory;
+  private String dni;
+  private String firstName;
+  private String lastName;
+  private String email;
+  private String username;
+  private Address address;
 
 }
