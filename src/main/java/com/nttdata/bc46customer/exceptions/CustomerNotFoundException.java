@@ -13,10 +13,10 @@ import lombok.Setter;
 @Setter
 public class CustomerNotFoundException extends RuntimeException {
   private final String idCustomer;
-  private static final String msg = "Datos del cliente no encontrados";
+  private static final String msg = "Datos del cliente no encontrados con el ID: ";
 
   public CustomerNotFoundException(String idCustomer) {
-    super(msg);
+    super(msg.concat(idCustomer));
     this.idCustomer = idCustomer;
   }
 

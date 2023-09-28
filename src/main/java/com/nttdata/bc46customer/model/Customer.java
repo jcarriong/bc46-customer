@@ -27,7 +27,8 @@ public class Customer extends BaseAuditDto {
   private String firstName;
   private String lastName;
   private String email;
-  private String username;
+  private String phoneNumber;
+  /*private String username;*/
   private Address address;
 
 }

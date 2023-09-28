@@ -46,6 +46,30 @@
             <artifactId>checkstyle</artifactId>
             <version>10.9.1</version>
         </dependency>
+        <!-- retrofit dependency -->
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>retrofit</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+        <!-- retrofit converter-gson -->
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>converter-gson</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+        <!-- retrofit retrofit-reactor-adapter -->
+        <dependency>
+            <groupId>com.jakewharton.retrofit</groupId>
+            <artifactId>retrofit2-reactor-adapter</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.wimdeblauwe</groupId>
+            <artifactId>error-handling-spring-boot-starter</artifactId>
+            <version>3.0.1</version>
+        </dependency>
 
     </dependencies>
 

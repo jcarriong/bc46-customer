@@ -1,12 +1,14 @@
 package com.nttdata.bc46customer.controller;
 
 import com.nttdata.bc46customer.model.Customer;
+import com.nttdata.bc46customer.model.response.CustomerAccountResponse;
 import com.nttdata.bc46customer.service.CustomerService;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -21,6 +23,15 @@ public class CustomerController {
   private CustomerService customerService;
 
   /**
+   * Retrofit
+   * Consultar todas las cuentas asociadas de un cliente
+   **/
+  @GetMapping("/findAccountsByCustomer/{idCustomer}")
+  public Flux<CustomerAccountResponse> getAccountsByCustomer(@PathVariable("idCustomer") String idCustomer) {
+    return customerService.getAccountsByCustomer(idCustomer);
+  }
+
+  /**
    * Crear un tipo de cliente bancario.
    **/
   @PostMapping("/save")
@@ -29,6 +40,12 @@ public class CustomerController {
     return customerService.save(customer)
         .map(customer1 -> new ResponseEntity<>(customer1, HttpStatus.CREATED))
         .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+  }
+
+  @GetMapping("/findAll")
+  public Flux<Customer> findAll() {
+    return customerService.findAll()
+        .doOnNext(customer -> customer.toString());
   }
 
   /**
