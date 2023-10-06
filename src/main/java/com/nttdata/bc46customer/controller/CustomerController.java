@@ -1,6 +1,6 @@
 package com.nttdata.bc46customer.controller;
 
-import com.nttdata.bc46customer.model.Customer;
+import com.nttdata.bc46customer.model.entity.Customer;
 import com.nttdata.bc46customer.model.response.CustomerAccountResponse;
 import com.nttdata.bc46customer.service.CustomerService;
 import java.time.LocalDateTime;

@@ -1,6 +1,6 @@
 package com.nttdata.bc46customer.repository;
 
-import com.nttdata.bc46customer.model.Customer;
+import com.nttdata.bc46customer.model.entity.Customer;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 

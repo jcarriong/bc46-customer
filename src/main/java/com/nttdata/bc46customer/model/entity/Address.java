@@ -1,4 +1,4 @@
-package com.nttdata.bc46customer.model;
+package com.nttdata.bc46customer.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

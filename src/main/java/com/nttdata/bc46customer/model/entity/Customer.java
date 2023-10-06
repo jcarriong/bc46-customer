@@ -1,5 +1,6 @@
-package com.nttdata.bc46customer.model;
+package com.nttdata.bc46customer.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nttdata.bc46customer.model.dto.BaseAuditDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

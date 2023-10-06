@@ -1,6 +1,6 @@
 package com.nttdata.bc46customer.model.response;
 
-import com.nttdata.bc46customer.model.Customer;
+import com.nttdata.bc46customer.model.entity.Customer;
 import com.nttdata.bc46customer.proxy.beans.account.AccountDto;
 import java.util.List;
 import lombok.AllArgsConstructor;

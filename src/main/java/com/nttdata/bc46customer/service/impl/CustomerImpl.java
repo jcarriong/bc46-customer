@@ -2,7 +2,7 @@ package com.nttdata.bc46customer.service.impl;
 
 import com.nttdata.bc46customer.exceptions.CustomerNotFoundException;
 import com.nttdata.bc46customer.exceptions.CustomerTypeBadRequestException;
-import com.nttdata.bc46customer.model.Customer;
+import com.nttdata.bc46customer.model.entity.Customer;
 import com.nttdata.bc46customer.model.response.CustomerAccountResponse;
 import com.nttdata.bc46customer.proxy.AccountRetrofitClient;
 import com.nttdata.bc46customer.repository.CustomerRepository;
@@ -56,13 +56,11 @@ public class CustomerImpl implements CustomerService {
         .filter(customer1 -> isValidCustomerType(customer1.getCustomerType()))
         .switchIfEmpty(Mono.error(() ->
             new CustomerTypeBadRequestException(customer.getCustomerType())))
-        .flatMap(customerToSave -> {
-          return generateCustomId() // genera un identificador personalizado
-              .flatMap(customId -> {
-                customerToSave.setIdCustomer(customId);
-                return customerRepository.save(customerToSave); //guarda el cliente con el customId
-              });
-        });
+        .flatMap(customerToSave -> generateCustomId() // genera un identificador personalizado
+            .flatMap(customId -> {
+              customerToSave.setIdCustomer(customId);
+              return customerRepository.save(customerToSave); //guarda el cliente con el customId
+            }));
   }
 
   private Mono<String> generateCustomId() {
@@ -71,7 +69,7 @@ public class CustomerImpl implements CustomerService {
           int nextNumber = count.intValue() + 1;
           return "C" + String.format("%04d", nextNumber);
         })
-        .defaultIfEmpty("C0001"); // Si no hay documentos, comenzar desde P001
+        .defaultIfEmpty("C0001"); // Si no hay documentos, comenzar desde C001
   }
 
   private boolean isValidCustomerType(String customerType) {
