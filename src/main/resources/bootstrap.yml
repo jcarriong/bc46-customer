@@ -1,7 +1,10 @@
 spring:
+  profiles:
+    active: dev
   application:
     name: bc46-customer
   cloud:
     config:
       uri: http://localhost:8888
-      profile: dev
+      username: root
+      password: s3cr3t
