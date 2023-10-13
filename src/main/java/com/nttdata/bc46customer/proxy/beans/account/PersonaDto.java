@@ -1,5 +1,6 @@
 package com.nttdata.bc46customer.proxy.beans.account;
 
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PersonaDto {
+public class PersonaDto implements Serializable {
 
   private String nombre; //nombre del titular o firmante autorizado.*
   private String dni; //numero de documento

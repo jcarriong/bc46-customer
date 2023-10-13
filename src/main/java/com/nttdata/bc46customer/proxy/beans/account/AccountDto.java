@@ -1,17 +1,14 @@
 package com.nttdata.bc46customer.proxy.beans.account;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.nttdata.bc46customer.model.dto.BaseAuditDto;
-import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import java.io.Serializable;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.LastModifiedDate;
 
 /**
  * Ntt Data - Top Employer 2023.
@@ -21,7 +18,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountDto {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class AccountDto implements Serializable {
   @Id
   private String idAccount;
   private String accountType;

@@ -2,6 +2,7 @@ package com.nttdata.bc46customer.service;
 
 import com.nttdata.bc46customer.model.entity.Customer;
 import com.nttdata.bc46customer.model.response.CustomerAccountResponse;
+import org.springframework.cache.annotation.Cacheable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

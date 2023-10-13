@@ -1,6 +1,5 @@
-package com.nttdata.bc46customer.proxy.beans.account;
+package com.nttdata.bc46customer.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,16 +14,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MovementDto implements Serializable {
-  @JsonIgnore
+public class MovementConsumerDto implements Serializable {
   private String idMovement;
   private String operation; //Operaciones: Transferir dinero, Pagar servicios*/
   private String movementType; //Depósito, Retiro, Pago, Tran.Ctas.Prop, Tran.Ctas.Terc
-  @JsonIgnore
   private String sourceAccount;
-  @JsonIgnore
   private String targetAccount;
-  @JsonIgnore
   private String moneda;
   private Float monto;
   private String creationDatetime;

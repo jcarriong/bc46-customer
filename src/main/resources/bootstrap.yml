@@ -8,3 +8,14 @@ spring:
       uri: http://localhost:8888
       username: root
       password: s3cr3t
+  redis:
+    host: localhost # Cambia esto a la dirección de tu servidor Redis si es diferente
+    port: 6379 # Cambia esto al puerto de tu servidor Redis si es diferente
+    cache:
+      time-to-live: 3600 # Tiempo de vida en segundos de los elementos en caché: 3600 seg
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092  # Por ejemplo, localhost:9092
+      group-id: customer-group
+      auto-offset-reset: earliest #para que un nuevo consumidor no pierda mensajes y si offset
+      #está fuera de rango, comenzará a consumir mensajes desde el inicio del registro del tema.

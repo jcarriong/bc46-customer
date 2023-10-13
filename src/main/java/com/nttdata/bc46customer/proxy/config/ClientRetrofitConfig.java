@@ -1,6 +1,5 @@
 package com.nttdata.bc46customer.proxy.config;
 
-
 import com.jakewharton.retrofit2.adapter.reactor.ReactorCallAdapterFactory;
 import com.nttdata.bc46customer.proxy.AccountRetrofitClient;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +12,7 @@ public class ClientRetrofitConfig {
   @Bean
   AccountRetrofitClient accountRetrofitClient() {
     Retrofit retrofit = new Retrofit.Builder()
-        .baseUrl("http://localhost:8052/api/")
+        .baseUrl("http://localhost:8052/api/accounts/")
         .addCallAdapterFactory(ReactorCallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
         .build();

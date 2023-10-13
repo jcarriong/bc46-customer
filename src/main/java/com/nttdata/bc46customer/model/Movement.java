@@ -1,4 +1,4 @@
-package com.nttdata.bc46customer.model.entity;
+package com.nttdata.bc46customer.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;

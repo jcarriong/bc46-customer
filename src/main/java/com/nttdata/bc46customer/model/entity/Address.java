@@ -1,5 +1,6 @@
 package com.nttdata.bc46customer.model.entity;
 
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address {
+public class Address implements Serializable {
   private String fullAddress;
   private String district;
   private String city;

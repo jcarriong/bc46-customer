@@ -1,11 +1,10 @@
 package com.nttdata.bc46customer.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.nttdata.bc46customer.model.dto.BaseAuditDto;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.io.Serializable;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,8 +16,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Document(collection = "customer")
-public class Customer extends BaseAuditDto {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Customer extends BaseAuditDto implements Serializable {
 
   @Id
   private String idCustomer;

@@ -4,6 +4,7 @@ import com.nttdata.bc46customer.model.entity.Customer;
 import com.nttdata.bc46customer.model.response.CustomerAccountResponse;
 import com.nttdata.bc46customer.service.CustomerService;
 import java.time.LocalDateTime;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,8 @@ import reactor.core.publisher.Mono;
  * Todos los derechos Reservados.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/customers")
+@Slf4j
 public class CustomerController {
 
   @Autowired
@@ -26,8 +28,12 @@ public class CustomerController {
    * Retrofit
    * Consultar todas las cuentas asociadas de un cliente
    **/
+  int cantidadReintentos = 1;
+
   @GetMapping("/findAccountsByCustomer/{idCustomer}")
   public Flux<CustomerAccountResponse> getAccountsByCustomer(@PathVariable("idCustomer") String idCustomer) {
+    log.info("Cantidad reintentos : {}", cantidadReintentos);
+    cantidadReintentos++;
     return customerService.getAccountsByCustomer(idCustomer);
   }
 
@@ -37,6 +43,7 @@ public class CustomerController {
   @PostMapping("/save")
   public Mono<ResponseEntity<Customer>> save(@RequestBody Customer customer) {
     customer.setCreationDatetime(LocalDateTime.now());
+    log.info("A bank customer was created");
     return customerService.save(customer)
         .map(customer1 -> new ResponseEntity<>(customer1, HttpStatus.CREATED))
         .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -44,6 +51,7 @@ public class CustomerController {
 
   @GetMapping("/findAll")
   public Flux<Customer> findAll() {
+    log.info("All bank customers were consulted");
     return customerService.findAll()
         .doOnNext(customer -> customer.toString());
   }
@@ -54,6 +62,7 @@ public class CustomerController {
   @GetMapping("/findById/{id}")
   public Mono<ResponseEntity<Customer>> findById(@PathVariable("id") String id) {
     Mono<Customer> customer = customerService.findById(id);
+    log.info("Bank customer consulted by id " + id);
     return customer.map(ResponseEntity::ok)
         .defaultIfEmpty(ResponseEntity.notFound().build());
   }
@@ -64,6 +73,7 @@ public class CustomerController {
   @PutMapping("/updateCustomerById/{idCustomer}")
   public Mono<ResponseEntity<Customer>> update(@RequestBody Customer bankCustomer,
                                                @PathVariable("idCustomer") String idCustomer) {
+    log.info("A bank customer was changed");
     return customerService.updateCustomer(bankCustomer, idCustomer)
         .map(ResponseEntity::ok)
         .defaultIfEmpty(ResponseEntity.badRequest().build());
@@ -74,6 +84,7 @@ public class CustomerController {
    **/
   @DeleteMapping("/deleteCustomerById/{idCustomer}")
   public Mono<ResponseEntity<Void>> deleteCustomer(@PathVariable("idCustomer") String idCustomer) {
+    log.info("Bank customer was deleted!");
     return customerService.deleteCustomer(idCustomer)
         .map(bankCustomer -> ResponseEntity.ok().<Void>build())
         .defaultIfEmpty(ResponseEntity.notFound().build());
