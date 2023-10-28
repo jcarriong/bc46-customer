@@ -20,7 +20,7 @@ public class KafkaConsumer {
       ObjectMapper objectMapper = new ObjectMapper();
       Movement movement = objectMapper.readValue(movementJson, Movement.class);
 
-      // Ahora puedes trabajar con el objeto Movement en el consumidor
+      // Devuelve el objeto Movement en el consumidor
       log.info("Consumed account movement: {}", movement);
     } catch (JsonProcessingException e) {
       log.error("Error al deserializar el mensaje JSON", e);
