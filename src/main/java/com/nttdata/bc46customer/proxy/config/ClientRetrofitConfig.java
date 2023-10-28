@@ -2,6 +2,8 @@ package com.nttdata.bc46customer.proxy.config;
 
 import com.jakewharton.retrofit2.adapter.reactor.ReactorCallAdapterFactory;
 import com.nttdata.bc46customer.proxy.AccountRetrofitClient;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import retrofit2.Retrofit;
@@ -11,10 +13,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ClientRetrofitConfig {
   @Bean
   AccountRetrofitClient accountRetrofitClient() {
+    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+    interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+    OkHttpClient client = new OkHttpClient.Builder()
+        .addInterceptor(interceptor)
+        .build();
+
     Retrofit retrofit = new Retrofit.Builder()
         .baseUrl("http://localhost:8052/api/accounts/")
         .addCallAdapterFactory(ReactorCallAdapterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
+        .client(client) // Configura el cliente OkHttpClient con el interceptor
         .build();
     return retrofit.create(AccountRetrofitClient.class);
   }

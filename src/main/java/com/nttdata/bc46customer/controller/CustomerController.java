@@ -25,13 +25,14 @@ public class CustomerController {
   private CustomerService customerService;
 
   /**
-   * Retrofit
-   * Consultar todas las cuentas asociadas de un cliente
+   * Retrofit:
+   * Consultar todas las cuentas asociadas de un cliente.
    **/
   int cantidadReintentos = 1;
 
-  @GetMapping("/findAccountsByCustomer/{idCustomer}")
-  public Flux<CustomerAccountResponse> getAccountsByCustomer(@PathVariable("idCustomer") String idCustomer) {
+  @GetMapping("/findAccounts/{idCustomer}")
+  public Flux<CustomerAccountResponse> getAccountsByCustomer(@PathVariable("idCustomer")
+                                                             String idCustomer) {
     log.info("Cantidad reintentos : {}", cantidadReintentos);
     cantidadReintentos++;
     return customerService.getAccountsByCustomer(idCustomer);

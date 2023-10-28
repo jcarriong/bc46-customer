@@ -1,9 +1,9 @@
 package com.nttdata.bc46customer.consumer;
 
-import com.nttdata.bc46customer.model.dto.MovementConsumerDto;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nttdata.bc46customer.model.Movement;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +12,19 @@ import org.springframework.stereotype.Service;
 public class KafkaConsumer {
 
   @KafkaListener(topics = "topic-movimientos-cuentas", groupId = "customer-group")
-  public void consume(Movement movement) {
+  public void consume(String movementJson) {
     /** Maneja el evento de movimiento recibido de Kafka. */
-    log.info("Consuming Message with Id: {}", movement.getIdMovement());
 
-    // Realiza la transformación de Movement a MovementConsumerDto
-    MovementConsumerDto movementDto = new MovementConsumerDto();
-    BeanUtils.copyProperties(movement, movementDto);
+    try {
+      // Deserializa el JSON a un objeto Movement
+      ObjectMapper objectMapper = new ObjectMapper();
+      Movement movement = objectMapper.readValue(movementJson, Movement.class);
 
-    log.info("Consumed Movement: {}", movementDto);
+      // Ahora puedes trabajar con el objeto Movement en el consumidor
+      log.info("Consumed account movement: {}", movement);
+    } catch (JsonProcessingException e) {
+      log.error("Error al deserializar el mensaje JSON", e);
+    }
 
   }
 
